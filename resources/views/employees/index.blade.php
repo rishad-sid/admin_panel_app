@@ -30,16 +30,19 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if ($message = session('message'))
+                                <div class="alert alert-success">{{ $message }}</div>
+                                @endif
                                 @if ($employees->count())
                                 @foreach($employees as $index => $employee)
                                 <tr>
-                                    <th scope="row">{{ $index + 1 }}</th>
+                                    <th scope="row">{{ $index + $employees->firstItem() }}</th>
                                     <td>{{ $employee->first_name }}</td>
                                     <td>{{ $employee->last_name }}</td>
                                     <td>{{ $employee->email }}</td>
                                     <td>{{ $employee->company->name }}</td>
                                     <td width="150">
-                                        <a href="show.html" class="btn btn-sm btn-circle btn-outline-info" title="Show"><i class="fa fa-eye"></i></a>
+                                        <a href={{ route('employees.show', $employee->id) }} class="btn btn-sm btn-circle btn-outline-info" title="Show"><i class="fa fa-eye"></i></a>
                                         <a href="form.html" class="btn btn-sm btn-circle btn-outline-secondary" title="Edit"><i class="fa fa-edit"></i></a>
                                         <a href="#" class="btn btn-sm btn-circle btn-outline-danger" title="Delete" onclick="confirm('Are you sure?')"><i class="fa fa-times"></i></a>
                                     </td>
