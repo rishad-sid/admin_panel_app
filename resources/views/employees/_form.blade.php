@@ -3,7 +3,7 @@
         <div class="form-group row">
             <label for="first_name" class="col-md-3 col-form-label">First Name</label>
             <div class="col-md-9">
-                <input type="text" name="first_name" value="{{ old('first_name') }}" id="first_name" class="form-control @error('first_name') is-invalid @enderror">
+                <input type="text" name="first_name" value="{{ old('first_name', $employee->first_name) }}" id="first_name" class="form-control @error('first_name') is-invalid @enderror">
                 @error('first_name')
                 <div class="invalid-feedback">
                     {{ $message  }}
@@ -15,7 +15,7 @@
         <div class="form-group row">
             <label for="last_name" class="col-md-3 col-form-label">Last Name</label>
             <div class="col-md-9">
-                <input type="text" name="last_name" value="{{ old('last_name') }}" id="last_name" class="form-control @error('last_name') is-invalid @enderror">
+                <input type="text" name="last_name" value="{{ old('last_name', $employee->last_name) }}" id="last_name" class="form-control @error('last_name') is-invalid @enderror">
                 @error('last_name')
                 <div class="invalid-feedback">
                     {{ $message  }}
@@ -27,7 +27,7 @@
         <div class="form-group row">
             <label for="email" class="col-md-3 col-form-label">Email</label>
             <div class="col-md-9">
-                <input type="text" name="email" value="{{ old('email') }}" id="email" class="form-control @error('email') is-invalid @enderror">
+                <input type="text" name="email" value="{{ old('email', $employee->email) }}" id="email" class="form-control @error('email') is-invalid @enderror">
                 @error('email')
                 <div class="invalid-feedback">
                     {{ $message  }}
@@ -39,7 +39,7 @@
         <div class="form-group row">
             <label for="phone" class="col-md-3 col-form-label">Phone</label>
             <div class="col-md-9">
-                <input type="text" name="phone" value="{{ old('phone') }}" id="phone" class="form-control @error('phone') is-invalid @enderror">
+                <input type="text" name="phone" value="{{ old('phone', $employee->phone) }}" id="phone" class="form-control @error('phone') is-invalid @enderror">
                 @error('phone')
                 <div class="invalid-feedback">
                     {{ $message  }}
@@ -53,7 +53,7 @@
             <div class="col-md-9">
                 <select name="company_id" id="company_id" class="form-control @error('company_id') is-invalid @enderror">
                     @foreach ($companies as $id => $name)
-                    <option {{ $id === old('company_id') ? 'selected' : '' }} value="{{ $id }}">{{ $name }}</option>
+                    <option {{ $id === old('company_id', $employee->company_id) ? 'selected' : '' }} value="{{ $id }}">{{ $name }}</option>
                     @endforeach
                 </select>
                 @error('company_id')
@@ -66,7 +66,7 @@
         <hr>
         <div class="form-group row mb-0">
             <div class="col-md-9 offset-md-3">
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary">{{ $employee->exists ? 'Update' : 'Save' }}</button>
                 <a href="{{ route('employees.index') }}" class="btn btn-outline-secondary">Cancel</a>
             </div>
         </div>
