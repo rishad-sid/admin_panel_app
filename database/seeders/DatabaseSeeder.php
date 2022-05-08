@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
     {
         Company::factory()->count(10)->create();
         Employee::factory()->count(50)->create();
+        $this->call(Admin::class);
     }
 }

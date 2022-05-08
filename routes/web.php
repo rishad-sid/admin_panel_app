@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +32,9 @@ Route::put('/employees/{id}', [EmployeeController::class, 'update'])->name('empl
 Route::delete('/employees/{id}', [EmployeeController::class, 'destroy'])->name('employees.destroy');
 
 Route::get('/employees/{id}/edit', [EmployeeController::class, 'edit'])->name('employees.edit');
+
+Auth::routes();
+
+Auth::routes(['register'=>false]);
+
+Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
