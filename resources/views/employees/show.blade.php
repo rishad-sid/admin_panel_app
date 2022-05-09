@@ -51,7 +51,7 @@
                                     <div class="col-md-9 offset-md-3">
                                         <a href="#" class="btn btn-info">Edit</a>
                                         <a href="#" class="btn btn-outline-danger">Delete</a>
-                                        <a href="index.html" class="btn btn-outline-secondary">Cancel</a>
+                                        <a href={{ route('employees.index') }} class="btn btn-outline-secondary">Cancel</a>
                                     </div>
                                 </div>
                             </div>

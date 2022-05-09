@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\CompanyController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,19 +20,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index');
-
-Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');
-
-Route::get('/employees/create', [EmployeeController::class, 'create'])->name('employees.create');
-
-Route::get('/employees/{id}', [EmployeeController::class, 'show'])->name('employees.show');
-
-Route::put('/employees/{id}', [EmployeeController::class, 'update'])->name('employees.update');
-
-Route::delete('/employees/{id}', [EmployeeController::class, 'destroy'])->name('employees.destroy');
-
-Route::get('/employees/{id}/edit', [EmployeeController::class, 'edit'])->name('employees.edit');
+Route::resources([
+    'employees' => EmployeeController::class,
+    'companies' => CompanyController::class
+]);
 
 Auth::routes();
 

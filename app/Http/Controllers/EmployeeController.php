@@ -39,15 +39,14 @@ class EmployeeController extends Controller
         return redirect()->route('employees.index')->with('message', 'Employee has been added successfully!');
     }
 
-    public function edit($id)
+    public function edit(Employee $employee)
     {
-        $employee = Employee::findOrFail($id);
         $companies = Company::orderBy('name')->pluck('name', 'id');
 
         return view('employees.edit', compact('companies', 'employee'));
     }
 
-    public function update($id, Request $request)
+    public function update(Employee $employee, Request $request)
     {
         $request->validate([
             'first_name' => 'required',
@@ -57,22 +56,19 @@ class EmployeeController extends Controller
             'company_id' => 'required|exists:companies,id',
         ]);
 
-        $employee = Employee::findOrFail($id);
         $employee->update($request->all());
 
         return redirect()->route('employees.index')->with('message', 'Employee has been updated successfully!');
     }
 
-    public function show($id)
+    public function show(Employee $employee)
     {
-        $employee = Employee::findOrFail($id);
 
         return view('employees.show', compact('employee'));
     }
 
-    public function destroy($id)
+    public function destroy(Employee $employee)
     {
-        $employee = Employee::findOrFail($id);
         $employee->delete();
 
         return back()->with('message', 'Employee has been deleted successfully!');
