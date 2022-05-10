@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\Company;
+use App\Http\Requests\EmployeeRequest;
 
 class EmployeeController extends Controller
 {
@@ -24,16 +25,8 @@ class EmployeeController extends Controller
         return view('employees.create', compact('companies', 'employee'));
     }
 
-    public function store(Request $request)
+    public function store(EmployeeRequest $request)
     {
-        $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|email',
-            'phone' => 'required',
-            'company_id' => 'required|exists:companies,id',
-        ]);
-
         Employee::create($request->all());
 
         return redirect()->route('employees.index')->with('message', 'Employee has been added successfully!');
@@ -46,16 +39,8 @@ class EmployeeController extends Controller
         return view('employees.edit', compact('companies', 'employee'));
     }
 
-    public function update(Employee $employee, Request $request)
+    public function update(Employee $employee, EmployeeRequest $request)
     {
-        $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|email',
-            'phone' => 'required',
-            'company_id' => 'required|exists:companies,id',
-        ]);
-
         $employee->update($request->all());
 
         return redirect()->route('employees.index')->with('message', 'Employee has been updated successfully!');
